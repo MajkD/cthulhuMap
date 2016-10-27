@@ -99,7 +99,6 @@ var handleMouseDown = function (event) {
 }
 
 var selectPlate = function(selectedPlate, index){
-  console.log("selected: ", myPlates[index].myImage.src)
   myClickedOffsetX = myCurMouseX - selectedPlate.myXPos;
   myClickedOffsetY = myCurMouseY - selectedPlate.myYPos;
   var temp = myPlates[index];
