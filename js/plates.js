@@ -6,6 +6,8 @@ var myCurrentSelectedImage = -1;
 var myClickedOffsetX = -1;
 var myClickedOffsetY = -1;
 
+var imgScale = 1.0;
+
 Plate = function (path, xPos, yPos) {
   this.myImage = new Image();
   this.myImage.src = path;
@@ -14,9 +16,14 @@ Plate = function (path, xPos, yPos) {
   this.myPath = path;
 };
 
-var myPlates = [new Plate("./img/buttonRed.jpg", 100, 100),
-                new Plate("./img/buttonWhite.jpg", 110, 110),
-                new Plate("./img/testIconYellow.png", 210, 210)];
+var myPlates = [new Plate("./img/1.png", 10, 10),
+                new Plate("./img/2.png", 30, 30),
+                new Plate("./img/3.png", 50, 50),
+                new Plate("./img/4.png", 70, 70),
+                new Plate("./img/5.png", 90, 90),
+                new Plate("./img/6.png", 110, 110),
+                new Plate("./img/7.png", 130, 130),
+                new Plate("./img/map.png", 400, 10)];
 
 var initializeCanvas = function () {
 
@@ -64,7 +71,9 @@ var draw = function () {
   var numPlates = myPlates.length;
   for(index = 0; index < numPlates; index++){
     var curPlate = myPlates[index];
-    myContext.drawImage(curPlate.myImage, curPlate.myXPos, curPlate.myYPos, curPlate.myImage.width, curPlate.myImage.height);
+    var width = curPlate.myImage.width * imgScale;
+    var height = curPlate.myImage.height * imgScale;
+    myContext.drawImage(curPlate.myImage, curPlate.myXPos, curPlate.myYPos, width, height);
   }
 }
 
@@ -89,8 +98,10 @@ var handleMouseDown = function (event) {
   var numPlates = myPlates.length;
   for(index = numPlates-1; index >= 0; index--){
     var curPlate = myPlates[index];
-    if(myCurMouseX > curPlate.myXPos && myCurMouseX <= curPlate.myXPos + curPlate.myImage.width){
-      if(myCurMouseY > curPlate.myYPos && myCurMouseY <= curPlate.myYPos + curPlate.myImage.height){
+    var width = curPlate.myImage.width * imgScale;
+    var height = curPlate.myImage.height * imgScale;
+    if(myCurMouseX > curPlate.myXPos && myCurMouseX <= curPlate.myXPos + width){
+      if(myCurMouseY > curPlate.myYPos && myCurMouseY <= curPlate.myYPos + height){
         selectPlate(curPlate, index);
         break;
       }
